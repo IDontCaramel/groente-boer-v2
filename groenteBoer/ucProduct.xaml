@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="groenteBoer.ucProduct"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:groenteBoer"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="450" Background="White">
+    <Grid>
+        <Image x:Name="utProductImage"></Image>
+        <Label x:Name="utProductID" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="1" Padding="0"></Label>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5">
+            <Label x:Name="utProductName" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="20" Padding="0">naam</Label>
+            <Label x:Name="utProductPrice" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" Padding="0">prijs</Label>
+        </StackPanel>
+        
+    </Grid>
+</UserControl>
