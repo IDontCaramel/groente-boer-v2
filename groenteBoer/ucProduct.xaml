@@ -6,14 +6,16 @@
              xmlns:local="clr-namespace:groenteBoer"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="450" Background="White">
-    <Grid>
-        <Image x:Name="utProductImage"></Image>
-        <Label x:Name="utProductID" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="1" Padding="0"></Label>
+    <Grid MouseDown="OnProductClick" Background="Transparent">
+        <Image x:Name="utProductImage" IsHitTestVisible="False" Stretch="Fill" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+        <Label x:Name="utProductID" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="1" Padding="0"/>
+        <Label x:Name="utProductCategory" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="1" Padding="0"/>
+
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,5">
             <Label x:Name="utProductName" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="20" Padding="0">naam</Label>
             <Label x:Name="utProductPrice" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="16" Padding="0">prijs</Label>
         </StackPanel>
-        
     </Grid>
 </UserControl>

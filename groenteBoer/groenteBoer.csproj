@@ -61,6 +61,10 @@
     <Compile Include="pageBetalen.xaml.cs">
       <DependentUpon>pageBetalen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TextBoxHelper.cs" />
+    <Compile Include="ucBon.xaml.cs">
+      <DependentUpon>ucBon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ucProduct.xaml.cs">
       <DependentUpon>ucProduct.xaml</DependentUpon>
     </Compile>
@@ -81,6 +85,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="pageBetalen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ucBon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -120,6 +128,18 @@
       <Project>{dc54f3a5-6348-4e55-96d5-71c33898c878}</Project>
       <Name>groenteBoerDatabase</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\localhost-file-not-found.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="localhost-file-not-found.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="assets\backspace-icon-512x429-83ij2eee.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="backspace-icon-512x429-83ij2eee.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

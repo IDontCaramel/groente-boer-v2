@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace groenteBoer
 {
     public partial class ucProduct : UserControl
     {
+        // Dependency Properties
         public static readonly DependencyProperty ProductNameProperty =
             DependencyProperty.Register("ProductName", typeof(string), typeof(ucProduct), new PropertyMetadata(string.Empty, OnProductNameChanged));
 
@@ -14,16 +16,23 @@ namespace groenteBoer
             DependencyProperty.Register("ProductPrice", typeof(string), typeof(ucProduct), new PropertyMetadata(string.Empty, OnProductPriceChanged));
 
         public static readonly DependencyProperty ProductImageProperty =
-            DependencyProperty.Register("ProductImage", typeof(string), typeof(ucProduct), new PropertyMetadata(string.Empty, OnProductImageChanged));
+            DependencyProperty.Register("ProductImage", typeof(ImageSource), typeof(ucProduct), new PropertyMetadata(null, OnProductImageChanged));
 
         public static readonly DependencyProperty ProductIDProperty =
             DependencyProperty.Register("ProductID", typeof(string), typeof(ucProduct), new PropertyMetadata(string.Empty, OnProductIDChanged));
+
+        public static readonly DependencyProperty ProductCategoryProperty =
+            DependencyProperty.Register("ProductCategory", typeof(string), typeof(ucProduct), new PropertyMetadata(string.Empty, OnProductCategoryChanged));
+
+        // Event to send data to parent
+        public event EventHandler<ProductClickEventArgs> ProductClicked;
 
         public ucProduct()
         {
             InitializeComponent();
         }
 
+        // Properties
         public string ProductName
         {
             get => (string)GetValue(ProductNameProperty);
@@ -36,9 +45,9 @@ namespace groenteBoer
             set => SetValue(ProductPriceProperty, value);
         }
 
-        public string ProductImage
+        public ImageSource ProductImage
         {
-            get => (string)GetValue(ProductImageProperty);
+            get => (ImageSource)GetValue(ProductImageProperty);
             set => SetValue(ProductImageProperty, value);
         }
 
@@ -48,7 +57,13 @@ namespace groenteBoer
             set => SetValue(ProductIDProperty, value);
         }
 
+        public string ProductCategory
+        {
+            get => (string)GetValue(ProductCategoryProperty);
+            set => SetValue(ProductCategoryProperty, value);
+        }
 
+        // DependencyProperty Changed Handlers
         private static void OnProductNameChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = d as ucProduct;
@@ -64,7 +79,7 @@ namespace groenteBoer
         private static void OnProductImageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = d as ucProduct;
-            control.utProductImage.Source = new BitmapImage(new Uri(e.NewValue as string, UriKind.RelativeOrAbsolute));
+            control.utProductImage.Source = e.NewValue as ImageSource;
         }
 
         private static void OnProductIDChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -73,9 +88,35 @@ namespace groenteBoer
             control.utProductID.Content = e.NewValue as string;
         }
 
+        private static void OnProductCategoryChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var control = d as ucProduct;
+            control.utProductCategory.Content = e.NewValue as string;
+        }
+
+        // Event handler for click
         private void OnProductClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show($"Name: {ProductName}\nPrice: {ProductPrice}\nImage Path: {ProductImage}");
+            // Raise the ProductClicked event and pass product details
+            ProductClicked?.Invoke(this, new ProductClickEventArgs(ProductName, ProductPrice, ProductID, ProductImage, ProductCategory));
+        }
+    }
+
+    public class ProductClickEventArgs : EventArgs
+    {
+        public string ProductName { get; }
+        public string ProductPrice { get; }
+        public string ProductID { get; }
+        public ImageSource ProductImage { get; }
+        public string ProductCategory { get; }
+
+        public ProductClickEventArgs(string productName, string productPrice, string productID, ImageSource productImage, string productCategory)
+        {
+            ProductName = productName;
+            ProductPrice = productPrice;
+            ProductID = productID;
+            ProductImage = productImage;
+            ProductCategory = productCategory;
         }
     }
 }
